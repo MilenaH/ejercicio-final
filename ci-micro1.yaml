@@ -17,7 +17,7 @@ spec:
   triggers:
     - type: GitHub
       github:
-        secret: "12345"
+        secret: "abc123"
     - type: ConfigChange
     - type: ImageChange
 ---

@@ -1,0 +1,27 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: micro2
+spec:
+  source:
+    type: Git
+    git:
+      uri: "https://github.com/MilenaH/ejercicio-final.git"
+    contextDir: "micro2"
+  strategy:
+    type: Docker
+  output:
+    to:
+      kind: ImageStreamTag
+      name: micro2:latest
+  triggers:
+    - type: GitHub
+      github:
+        secret: "abc123"
+    - type: ConfigChange
+    - type: ImageChange
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: micro2
