@@ -1,0 +1,66 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: micro1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: micro1
+  template:
+    metadata:
+      labels:
+        app: micro1
+    spec:
+      containers:
+      - name: micro1
+        image: image-registry.openshift-image-registry.svc:5000/milena-hernandezb-dev/micro1:latest
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: micro1
+spec:
+  selector:
+    app: micro1
+  ports:
+  - port: 80
+    targetPort: 8080
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: micro2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: micro2
+  template:
+    metadata:
+      labels:
+        app: micro2
+    spec:
+      containers:
+      - name: micro2
+        image: image-registry.openshift-image-registry.svc:5000/milena-hernandezb-dev/micro2:latest
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: micro2
+spec:
+  selector:
+    app: micro2
+  ports:
+  - port: 80
+    targetPort: 8080
+
