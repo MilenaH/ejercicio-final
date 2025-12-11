@@ -1,0 +1,31 @@
+name: Build and Deploy Micro2 to OpenShift
+
+on:
+  push:
+    paths:
+      - "micro2/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install oc CLI
+      run: |
+        curl -L https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz -o oc.tar.gz
+        tar -xvf oc.tar.gz
+        sudo mv oc /usr/local/bin/
+
+    - name: Login to OpenShift
+      run: |
+        oc login ${{ secrets.OCP_SERVER }} \
+        --token=${{ secrets.OCP_TOKEN }} \
+        --insecure-skip-tls-verify=true \
+        -n ${{ secrets.OCP_NAMESPACE }}
+
+    - name: Trigger build
+      run: |
+        oc start-build micro2 --follow --wait
