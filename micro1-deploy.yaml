@@ -1,0 +1,21 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: micro1
+spec:
+  replicas: 1
+  selector:
+    app: micro1
+  template:
+    metadata:
+      labels:
+        app: micro1
+    spec:
+      containers:
+      - name: micro1
+        image: ""  # Se deja vacío para usar la imagen del BuildConfig
+        ports:
+        - containerPort: 5000
+  triggers:
+  - type: ConfigChange
+  - type: ImageChange

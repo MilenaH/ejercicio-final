@@ -22,9 +22,9 @@ jobs:
     - name: Login to OpenShift
       run: |
         oc login ${{ secrets.OCP_SERVER }} \
-        --token=${{ secrets.OCP_TOKEN }} \
-        --insecure-skip-tls-verify=true \
-        -n ${{ secrets.OCP_NAMESPACE }}
+          --token=${{ secrets.OCP_TOKEN }} \
+          --insecure-skip-tls-verify=true \
+          -n ${{ secrets.OCP_NAMESPACE }}
 
     - name: Trigger build
       run: |
