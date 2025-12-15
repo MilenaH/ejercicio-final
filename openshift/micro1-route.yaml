@@ -1,0 +1,10 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: micro1-route
+spec:
+  to:
+    kind: Service
+    name: micro1
+  port:
+    targetPort: 8000

@@ -16,4 +16,4 @@ spec:
       - name: micro2
         image: image-registry.openshift-image-registry.svc:5000/milena-hernandezb-dev/micro2:latest
         ports:
-        - containerPort: 5000
+        - containerPort: 8000

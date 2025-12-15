@@ -17,3 +17,4 @@ spec:
         image: image-registry.openshift-image-registry.svc:5000/milena-hernandezb-dev/micro1:latest
         ports:
         - containerPort: 5000
+
